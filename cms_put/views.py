@@ -4,12 +4,15 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
+
+
 def show(request):
     content = Pages.objects.all()
     response = ""
     for entry in content:
         response = entry.name + ": " + entry.page + "<br>" + response
     return HttpResponse(response)
+
 
 @csrf_exempt
 def entry(request, resource):
@@ -39,8 +42,9 @@ def entry(request, resource):
             pagina.save()
             response = "Se ha creado la página " + resource
     else:
-        response = "Error. Método no soportado.";
+        response = "Error. Método no soportado."
     return HttpResponse(response)
+
 
 def error(request):
     response = "El recurso solicitado no existe"
